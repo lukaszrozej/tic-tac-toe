@@ -1,4 +1,3 @@
-console.log('hej');
 
 const initialState = {
   board: {
@@ -57,11 +56,3 @@ function makeMove(location, state) {
     finished,
   }
 }
-
-let s = initialState;
-
-s = makeMove('top', s);
-s = makeMove('left', s);
-s = makeMove('center', s);
-s = makeMove('right', s);
-s = makeMove('bottom', s);
