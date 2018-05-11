@@ -31,7 +31,7 @@ function findWinningTriple(board) {
   ];
 
   return triples.find(triple =>
-    triple[0] === triple[1] && tripple[0] === triple[3]
+    triple[0] === triple[1] && tripple[0] === triple[2]
   );
 }
 
