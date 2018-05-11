@@ -15,7 +15,7 @@ const initialState = {
   player: 'x',
   winner: undefined,
   winningTriple: undefined,
-  status: 'play',
+  finished: false,
 };
 
 function findWinningTriple(board) {
@@ -31,7 +31,8 @@ function findWinningTriple(board) {
   ];
 
   return triples.find(triple =>
-    triple[0] === triple[1] && tripple[0] === triple[2]
+    board[triple[0]] === board[triple[1]] &&
+    board[triple[0]] === board[triple[2]]
   );
 }
 
@@ -43,14 +44,24 @@ function makeMove(location, state) {
   const newBoard = Object.assign({}, state.board, {[location]: state.player});
   const newPlayer = state.player === 'x' ? 'o' : 'x';
   const winningTriple = findWinningTriple(newBoard);
-  const winner = winningTriple ? winningTriple[0] : undefined;
-  const status = winner || Object.values(newBoard).every(item => item !== 'empty');
+  const winner = winningTriple ? newBoard[winningTriple[0]] : undefined;
+  const finished =
+    winner !== undefined ||
+    Object.values(newBoard).every(item => item !== 'empty');
 
   return {
     board: newBoard,
     player: newPlayer,
     winner,
     winningTriple,
-    status,
+    finished,
   }
 }
+
+let s = initialState;
+
+s = makeMove('top', s);
+s = makeMove('left', s);
+s = makeMove('center', s);
+s = makeMove('right', s);
+s = makeMove('bottom', s);
