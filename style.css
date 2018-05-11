@@ -8,8 +8,21 @@
   border-collapse: collapse;
 }
 
-.square {
+.board td {
   width: 5em;
   height: 5em;
   border: 0.5em solid rgb(21, 51, 21);
 }
+
+.board td.empty {
+  background-color: white;
+}
+
+.board td.x {
+  background-color: lightgreen;
+}
+
+.board td.o {
+  background-color: lightblue;
+}
+

@@ -13,7 +13,7 @@ const initialState = {
     'bottom-right': 'empty',
   },
   player: 'x',
-  winner: undefined,
+  winner: 'Nobody',
   winningTriple: undefined,
   finished: false,
 };
@@ -44,7 +44,7 @@ function makeMove(location, state) {
   const newBoard = Object.assign({}, state.board, {[location]: state.player});
   const newPlayer = state.player === 'x' ? 'o' : 'x';
   const winningTriple = findWinningTriple(newBoard);
-  const winner = winningTriple ? newBoard[winningTriple[0]] : undefined;
+  const winner = winningTriple ? newBoard[winningTriple[0]] : 'Nobody';
   const finished =
     winner !== undefined ||
     Object.values(newBoard).every(item => item !== 'empty');
@@ -59,3 +59,30 @@ function makeMove(location, state) {
 }
 
 // Presentation
+
+const $squares = {};
+document.querySelectorAll('.board td').forEach(square => $squares[square.id] = square);
+const $message = document.querySelector('#message');
+const $winner = document.querySelector('#winner');
+
+function render(state) {
+  Object.entries(state.board)
+    .forEach(([location, content]) =>
+      $squares[location].className = content
+    );
+
+  if (!state.finished) return;
+
+  $message.className = 'show';
+  $winner.textContent = state.winner;
+
+  // TODO: render winning triple
+}
+
+let s = initialState;
+s = makeMove('top', s);
+s = makeMove('left', s);
+s = makeMove('center', s);
+s = makeMove('right', s);
+s = makeMove('bottom', s);
+render(s);
