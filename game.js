@@ -1,3 +1,4 @@
+// Game logic
 
 const initialState = {
   board: {
@@ -56,3 +57,5 @@ function makeMove(location, state) {
     finished,
   }
 }
+
+// Presentation
