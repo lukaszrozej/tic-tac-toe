@@ -36,7 +36,7 @@ function findWinningTriple(board) {
 }
 
 function makeMove(location, state) {
-  if (state.board[location] === 'empty') {
+  if (state.board[location] !== 'empty') {
     return state;
   }
 
@@ -44,7 +44,7 @@ function makeMove(location, state) {
   const newPlayer = state.player === 'x' ? 'o' : 'x';
   const winningTriple = findWinningTriple(newBoard);
   const winner = winningTriple ? winningTriple[0] : undefined;
-  const status = winner || Object.values(board).every(item => item !== 'empty');
+  const status = winner || Object.values(newBoard).every(item => item !== 'empty');
 
   return {
     board: newBoard,
