@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.board {
+  border-collapse: collapse;
+}
+
+.square {
+  width: 5em;
+  height: 5em;
+  border: 0.5em solid darkgreen;
+}
